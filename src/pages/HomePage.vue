@@ -1,53 +1,41 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
-  </q-page>
+  <div id="home-page" class="flex justify-center items-center">
+    <interaction-menu
+      :data="interactionMenuData"
+      @updateState="updateState($event)"
+    />
+  </div>
 </template>
 
 <script lang="ts">
-import { Todo, Meta } from "components/models";
-import ExampleComponent from "components/ExampleComponent.vue";
 import { defineComponent } from "vue";
+import InteractionMenu from "src/components/InteractionMenu/InteractionMenu.vue";
+import { Data } from "src/components/InteractionMenu/types";
 
 export default defineComponent({
   name: "HomePage",
 
-  components: { ExampleComponent },
+  components: { InteractionMenu },
 
   data() {
-    const todos: Todo[] = [
-      {
-        id: 1,
-        content: "ct1",
-      },
-      {
-        id: 2,
-        content: "ct2",
-      },
-      {
-        id: 3,
-        content: "ct3",
-      },
-      {
-        id: 4,
-        content: "ct4",
-      },
-      {
-        id: 5,
-        content: "ct5",
-      },
-    ];
-
-    const meta: Meta = {
-      totalCount: 1200,
+    const interactionMenuData: Data = {
+      avatar: "mia-avatar.png",
+      title: "Assistente Virtual Mia",
+      subtitle: "Ative abaixo:",
+      state: false,
     };
 
-    return { todos, meta };
+    return { interactionMenuData };
+  },
+
+  methods: {
+    updateState(state: boolean): void {
+      this.interactionMenuData.state = state;
+    },
   },
 });
 </script>
+
+<style lang="scss" scoped>
+@import "src/css/HomePage/homePage.scss";
+</style>
