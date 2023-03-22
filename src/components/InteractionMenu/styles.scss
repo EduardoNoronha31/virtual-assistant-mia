@@ -1,0 +1,25 @@
+#interaction-menu {
+  border-radius: 60px;
+  background: transparent;
+
+  .general-content {
+    width: 100vw;
+    max-width: 350px;
+    height: 400px;
+    border: 1px double #ffffff46;
+
+    .avatar-section {
+      width: 100%;
+      .avatar {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    .button-section {
+      .button {
+        border-radius: 15px;
+      }
+    }
+  }
+}
