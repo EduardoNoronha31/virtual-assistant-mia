@@ -43,9 +43,58 @@ export default defineComponent({
     },
   },
 
+  data(): { speechApi: any } {
+    return {
+      speechApi: {},
+    };
+  },
+
+  mounted() {
+    this.initSpeechApi();
+  },
+
   methods: {
+    initSpeechApi(): void {
+      const SpeechToText =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      this.speechApi = new SpeechToText();
+      this.speechApi.continuous = true;
+      this.speechApi.lang = "pt-BR";
+      this.speechApi.interimResults = true;
+
+      this.speechApi.onresult = (event: any) => {
+        const { resultIndex } = event;
+        const { transcript } = event.results[resultIndex][0];
+
+        console.log(transcript);
+      };
+    },
+
     toggleState(state: boolean): void {
-      this.$emit("updateState", !state);
+      const toggledState = !state;
+
+      this.$emit("updateState", toggledState);
+      this.toggleSpeechRecognition(toggledState);
+    },
+
+    toggleSpeechRecognition(state: boolean): void {
+      if (state) {
+        this.startCapturingSpeech();
+        return;
+      }
+
+      if (!state) {
+        this.stopCapturingSpeech();
+      }
+    },
+
+    startCapturingSpeech(): void {
+      this.speechApi.start();
+    },
+
+    stopCapturingSpeech(): void {
+      this.speechApi.stop();
     },
   },
 });
