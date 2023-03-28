@@ -3,7 +3,7 @@
     <q-item class="general-content flex column items-center">
       <q-item-section class="avatar-section flex items-center">
         <q-avatar class="avatar">
-          <img :src="`src/assets/${data.avatar}`" alt="Avatar" />
+          <img :src="`${data.avatar}`" alt="Avatar" />
         </q-avatar>
       </q-item-section>
 
