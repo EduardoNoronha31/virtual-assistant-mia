@@ -31,6 +31,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
+import { Notify } from "quasar";
 import { Data } from "./types";
 
 export default defineComponent({
@@ -61,13 +62,17 @@ export default defineComponent({
       this.speechApi = new SpeechToText();
       this.speechApi.continuous = true;
       this.speechApi.lang = "pt-BR";
-      this.speechApi.interimResults = true;
 
       this.speechApi.onresult = (event: any) => {
         const { resultIndex } = event;
         const { transcript } = event.results[resultIndex][0];
 
-        console.log(transcript);
+        Notify.create({
+          position: "top",
+          message: transcript,
+          type: "positive",
+          progress: true,
+        });
       };
     },
 

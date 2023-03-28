@@ -86,6 +86,7 @@ module.exports = {
     quotes: "off",
     "operator-linebreak": "off",
     "@typescript-eslint/no-explicit-any": "off",
+    "comma-dangle": "off",
 
     // this rule, if on, would require explicit return type on the `render` function
     "@typescript-eslint/explicit-function-return-type": "off",
